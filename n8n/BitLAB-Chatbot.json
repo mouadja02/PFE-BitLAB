@@ -1,0 +1,3221 @@
+{
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "id": "039662f5-ebd9-4d10-9591-807e7acc6837",
+      "name": "Telegram Trigger",
+      "type": "n8n-nodes-base.telegramTrigger",
+      "position": [
+        -48,
+        1664
+      ],
+      "typeVersion": 1.2,
+      "webhookId": "09870eeb-f6cb-4cc6-a28d-049bdb722301",
+      "credentials": {
+        "telegramApi": {
+          "id": "YOz9wYD3e4mXfWlw",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('Telegram Trigger').item.json.message.text }}",
+                    "rightValue": "/start",
+                    "operator": {
+                      "type": "string",
+                      "operation": "startsWith"
+                    },
+                    "id": "bbb31f93-389a-4965-96cf-78aa164fc238"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('Telegram Trigger').item.json.message.text }}",
+                    "rightValue": "/action",
+                    "operator": {
+                      "type": "string",
+                      "operation": "startsWith"
+                    },
+                    "id": "action-condition-id"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('Telegram Trigger').item.json.message.text }}",
+                    "rightValue": "/stop",
+                    "operator": {
+                      "type": "string",
+                      "operation": "startsWith"
+                    },
+                    "id": "stop-condition-id"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "883e1a96-8d18-4d19-a5e8-11a4edc1e9e5",
+                    "leftValue": "={{ $('Telegram Trigger').item.json.message.text }}",
+                    "rightValue": "/news",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "60f76114-0355-438e-af2b-368951cb182d",
+                    "leftValue": "={{ $('Telegram Trigger').item.json.message.text }}",
+                    "rightValue": "/price",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "894d3589-4f1b-401d-9842-a73701fb1995",
+                    "leftValue": "={{ $('Telegram Trigger').item.json.message.text }}",
+                    "rightValue": "/help",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "23b5c460-5263-4072-97cf-020260027049",
+      "name": "Switch on Command",
+      "type": "n8n-nodes-base.switch",
+      "position": [
+        848,
+        1264
+      ],
+      "typeVersion": 3.2
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
+        "text": "🚀 Bienvenue dans l'assistant BitLAB!\n\nVotre assistant Bitcoin vient de recevoir une mise à jour MAJEURE!\n\n🧠 **NOUVEAU**: IA alimentée par Google Gemini & DeepSeek  \n📊 **DONNÉES EN TEMPS RÉEL**: Métriques blockchain, analyse technique & sentiment du marché  \n⛓️ **ANALYSE ON-CHAIN**: Statistiques réseau & mouvements des baleines  \n💰 **DONNÉES D'ÉCHANGE**: Carnets d'ordres & volume OHLCV en direct  \n😊 **SENTIMENT**: Tracking Twitter, Reddit & réseaux sociaux  \n\n**🎯 Nouvelles Capacités:**\n✅ Réponses IA contextuelles intelligentes\n✅ Données fraîches mises à jour chaque seconde  \n✅ Analyse technique avancée & signaux de trading\n✅ Analyse du sentiment des réseaux sociaux\n✅ Insights blockchain en temps réel\n\n**💡 Essayez maintenant:**\n**📋 Commande programmée:**\n/news - Dernières actualités Bitcoin\n/action - Signal de trading actuel  \n/price - Prix BTC temps réel\n/help - Afficher l''aide\n/stop - Se désabonner\n\n**💡 ou une question directe:**\n- \"Quel est le sentiment du marché?\"\n- \"Montre-moi l'analyse technique\"  \n- \"Que se passe-t-il on-chain?\"\n\n🔥 Votre compagnon Bitcoin est maintenant plus puissant que jamais!\n\n⚠️ Version Beta - Vos retours sont précieux pour améliorer notre projet.",
+        "additionalFields": {}
+      },
+      "id": "80538079-0212-4da1-b021-f3057e912883",
+      "name": "Send Welcome Message",
+      "type": "n8n-nodes-base.telegram",
+      "position": [
+        1968,
+        864
+      ],
+      "typeVersion": 1.2,
+      "webhookId": "7ffedb7c-8615-4ce8-9685-94ee8b60c617",
+      "credentials": {
+        "telegramApi": {
+          "id": "YOz9wYD3e4mXfWlw",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT EXECUTION_DATE, SIGNAL, CURRENT_SIGNAL, BTC_PRICE, MVRV_ZSCORE, NUPL_ZSCORE, COMBINED_ZSCORE, TOTAL_RETURN, BUY_HOLD_RETURN, OUTPERFORMANCE, MONTH_RETURN, MARKET_MONTH_RETURN, STRATEGY_MESSAGE FROM BTC_DATA.BOT.STRATEGY_RESULTS ORDER BY CREATED_TIMESTAMP DESC LIMIT 1"
+      },
+      "id": "7bc5d751-c4cb-4e49-9852-9361c742203e",
+      "name": "Get Latest Strategy Result",
+      "type": "n8n-nodes-base.snowflake",
+      "position": [
+        1072,
+        1040
+      ],
+      "typeVersion": 1,
+      "credentials": {
+        "snowflake": {
+          "id": "08DSPiqy4VUOejq6",
+          "name": "Snowflake account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "functionCode": "// Extract data from Snowflake result\nconst data = $input.item.json;\n\n// Get signal emoji\nfunction getSignalEmoji(signal) {\n  switch(signal) {\n    case 'LONG': return '🟢';\n    case 'SHORT': return '🔴';\n    case 'HOLD BTC': return '💎';\n    case 'HOLD FIAT': return '💵';\n    default: return '⚪';\n  }\n}\n\nconst emoji = getSignalEmoji(data.CURRENT_SIGNAL);\n\n// The STRATEGY_MESSAGE is now stored as a formatted string in Snowflake\nconst message = data.STRATEGY_MESSAGE;\n\nreturn {\n  chatId: $('Telegram Trigger').item.json.message.chat.id,\n  message: message\n};"
+      },
+      "id": "7df7f55e-abc4-46ac-acae-7c85853b849a",
+      "name": "Format Strategy Message",
+      "type": "n8n-nodes-base.function",
+      "position": [
+        1296,
+        1040
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
+        "text": "={{ $json.message }}",
+        "additionalFields": {
+          "parse_mode": "Markdown"
+        }
+      },
+      "id": "d6e31adc-b38c-4601-8179-cce62ae0dfed",
+      "name": "Send Strategy Message",
+      "type": "n8n-nodes-base.telegram",
+      "position": [
+        1520,
+        1040
+      ],
+      "typeVersion": 1.2,
+      "webhookId": "8a5fadf6-d706-4034-b832-add5464d710b",
+      "credentials": {
+        "telegramApi": {
+          "id": "YOz9wYD3e4mXfWlw",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
+        "text": "👋 Vous avez été désabonné du Bot BitLAB\n\nMerci d'avoir testé notre assistant !\n\n🔄 **Réabonnement:**\nVous pouvez revenir à tout moment en envoyant /start\n\nBonne chance avec vos investissements Bitcoin! 🚀📈\n\n**BitLAB Team** 💙",
+        "additionalFields": {}
+      },
+      "id": "be74c668-c564-402a-9b70-ff3c6c9fe1bc",
+      "name": "Send Goodbye Message",
+      "type": "n8n-nodes-base.telegram",
+      "position": [
+        1296,
+        1232
+      ],
+      "typeVersion": 1.2,
+      "webhookId": "cd0f0f04-39cd-4fad-979d-6687a6d23e1e",
+      "credentials": {
+        "telegramApi": {
+          "id": "YOz9wYD3e4mXfWlw",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "MERGE INTO BTC_DATA.BOT.TELEGRAM_SUBSCRIBERS AS target\nUSING (\n    SELECT '{{ $json.chatId }}' AS CHAT_ID,\n           '{{ $json.username }}' AS USERNAME,\n           '{{ $json.firstName }}' AS FIRST_NAME,\n           '{{ $json.lastName }}' AS LAST_NAME,\n           CURRENT_TIMESTAMP() AS SUBSCRIBED_AT,\n           TRUE AS IS_ACTIVE\n) AS source\nON target.CHAT_ID = source.CHAT_ID\nWHEN MATCHED THEN \n    UPDATE SET IS_ACTIVE = TRUE, SUBSCRIBED_AT = '{{ $json.subscribedAt }}'\nWHEN NOT MATCHED THEN \n    INSERT (CHAT_ID, USERNAME, FIRST_NAME, LAST_NAME, SUBSCRIBED_AT, IS_ACTIVE)\n    VALUES (source.CHAT_ID, source.USERNAME, source.FIRST_NAME, source.LAST_NAME, source.SUBSCRIBED_AT, source.IS_ACTIVE);"
+      },
+      "type": "n8n-nodes-base.snowflake",
+      "typeVersion": 1,
+      "position": [
+        1744,
+        848
+      ],
+      "id": "c85cbc02-cc52-484d-89fc-a468fb2c733e",
+      "name": "Save Subscriber to Snowflake",
+      "credentials": {
+        "snowflake": {
+          "id": "08DSPiqy4VUOejq6",
+          "name": "Snowflake account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "UPDATE BTC_DATA.BOT.TELEGRAM_SUBSCRIBERS \nSET IS_ACTIVE = FALSE \nWHERE CHAT_ID = '{{ $('Telegram Trigger').item.json.message.chat.id }}'"
+      },
+      "type": "n8n-nodes-base.snowflake",
+      "typeVersion": 1,
+      "position": [
+        1072,
+        1232
+      ],
+      "id": "0a73fedc-30f5-4227-ad3f-7cb069d554ae",
+      "name": "Deactivate Subscriber in Snowflake",
+      "credentials": {
+        "snowflake": {
+          "id": "08DSPiqy4VUOejq6",
+          "name": "Snowflake account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT COALESCE(IS_ACTIVE, FALSE) as IS_ACTIVE \nFROM BTC_DATA.BOT.TELEGRAM_SUBSCRIBERS \nWHERE CHAT_ID = '{{ $('Telegram Trigger').item.json.message.chat.id }}'"
+      },
+      "type": "n8n-nodes-base.snowflake",
+      "typeVersion": 1,
+      "position": [
+        1072,
+        672
+      ],
+      "id": "0d8de84d-3b5f-4ccd-951d-059619d47ae5",
+      "name": "check subscription",
+      "alwaysOutputData": true,
+      "credentials": {
+        "snowflake": {
+          "id": "08DSPiqy4VUOejq6",
+          "name": "Snowflake account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "71bef502-6096-41af-a192-b477a953591c",
+              "leftValue": "={{ $json.IS_ACTIVE }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1296,
+        672
+      ],
+      "id": "c206840d-ee91-4400-ae05-e0c793e2f3d4",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
+        "text": "✅ Vous êtes déjà abonné au Bot BitLAB!\n\n🧠 **IA AVANCÉE**: Powered by Google Gemini & DeepSeek\n📊 **DONNÉES LIVE**: Blockchain, trading & sentiment en temps réel et bien plus\n\n**📋 Commandes programmées:**\n/news - Dernières actualités Bitcoin\n/action - Signal de trading actuel  \n/price - Prix BTC temps réel\n/help - Afficher l'aide\n/stop - Se désabonner\n\n**💡 Questions directes:**\n- \"Quel est le sentiment du marché?\"\n- \"Montre-moi l'analyse technique\"  \n- \"Que se passe-t-il on-chain?\"\n- \"Analyse du prix Bitcoin\"\n\n🔥 Votre assistant Bitcoin AI est maintenant ultra-intelligent!\n\n⚠️ Version Beta - Vos retours nous aident à améliorer l'IA.\n\n--v2.0.0",
+        "additionalFields": {
+          "appendAttribution": true
+        }
+      },
+      "id": "cd0f44d3-1b2f-475d-b05e-949a4a42076d",
+      "name": "Send Welcome Message1",
+      "type": "n8n-nodes-base.telegram",
+      "position": [
+        1520,
+        656
+      ],
+      "typeVersion": 1.2,
+      "webhookId": "7ffedb7c-8615-4ce8-9685-94ee8b60c617",
+      "credentials": {
+        "telegramApi": {
+          "id": "YOz9wYD3e4mXfWlw",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://min-api.cryptocompare.com/data/v2/news/?lang=EN&categories=BTC",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "User-Agent",
+              "value": "n8n-bitcoin-bot"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1072,
+        1424
+      ],
+      "id": "cf3df6b0-aaed-473a-a9c8-722579328009",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Extract the latest 3 news articles\nconst newsData = $input.item.json.Data;\nconst latestNews = newsData.slice(0, 3);\n\n// Format the news message\nlet newsMessage = '📰 *Dernières actualités Bitcoin*\\n\\n';\n\nlatestNews.forEach((article, index) => {\n  const date = new Date(article.published_on * 1000);\n  const formattedDate = date.toLocaleDateString('fr-FR', {\n    day: '2-digit',\n    month: '2-digit',\n    year: 'numeric',\n    hour: '2-digit',\n    minute: '2-digit'\n  });\n  \n  newsMessage += `*${index + 1}. ${article.title}*\\n`;\n  newsMessage += `📰 Source: ${article.source_info.name}\\n`;\n  newsMessage += `🔗 [Lire l'article](${article.url})\\n\\n`;\n});\n\nnewsMessage += '💡 *Utilisez /action pour obtenir le dernier signal de trading*';\n\nreturn {\n  message: newsMessage\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1296,
+        1424
+      ],
+      "id": "9c5adcd2-75e2-4e1d-ab55-38b49fd8c8bc",
+      "name": "Code"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "14c0cd17-6c02-4008-a259-ed23750249de",
+              "name": "chatId",
+              "value": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
+              "type": "string"
+            },
+            {
+              "id": "051f0f7f-7b17-4d3a-985b-8e38e50c007a",
+              "name": "firstName",
+              "value": "={{ $('Telegram Trigger').item.json.message.chat.first_name }}",
+              "type": "string"
+            },
+            {
+              "id": "b4bfb739-210a-482b-a7d1-f338b1f15ece",
+              "name": "lastName",
+              "value": "={{ $('Telegram Trigger').item.json.message.chat.last_name }}",
+              "type": "string"
+            },
+            {
+              "id": "33bf17ca-a4a8-49ab-b676-cbd3ae2de9e9",
+              "name": "username",
+              "value": "={{ $('Telegram Trigger').item.json.message.chat.username }}",
+              "type": "string"
+            },
+            {
+              "id": "eee6be3c-222e-4263-95ee-57321935c371",
+              "name": "subscribed",
+              "value": true,
+              "type": "boolean"
+            },
+            {
+              "id": "91b9fd07-6d67-4ccf-99bc-36f438055481",
+              "name": "subscribedAt",
+              "value": "={{ new Date().toISOString() }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1520,
+        848
+      ],
+      "id": "398ff500-16bd-4fca-8fb4-e15e5a00a18a",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
+        "text": "={{ $json.message }}",
+        "additionalFields": {}
+      },
+      "id": "9ca7500a-cd5b-4c73-83f4-b069ae5bdebb",
+      "name": "Send News Message",
+      "type": "n8n-nodes-base.telegram",
+      "position": [
+        1520,
+        1424
+      ],
+      "typeVersion": 1.2,
+      "webhookId": "cd0f0f04-39cd-4fad-979d-6687a6d23e1e",
+      "credentials": {
+        "telegramApi": {
+          "id": "YOz9wYD3e4mXfWlw",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://min-api.cryptocompare.com/data/v2/histominute",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "fsym",
+              "value": "BTC"
+            },
+            {
+              "name": "tsym",
+              "value": "USD"
+            },
+            {
+              "name": "limit",
+              "value": "1"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1072,
+        1616
+      ],
+      "id": "d4da9b0b-9c68-4ef4-95a8-4c3af87920f0",
+      "name": "HTTP Request1"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
+        "text": "=Le prix de clôture actuel du BTC est {{ $json.Data.Data[1].close }} USD.",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1296,
+        1616
+      ],
+      "id": "5b200069-b2cc-4c6c-b36c-e6e2c1fbee9e",
+      "name": "Send a text message",
+      "webhookId": "04847a35-4b59-430d-afba-415bc71872b9",
+      "credentials": {
+        "telegramApi": {
+          "id": "YOz9wYD3e4mXfWlw",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT COALESCE(CHAT_ID, 'NULL') as CHAT_ID, \n       COALESCE(IS_ACTIVE, FALSE) as IS_ACTIVE \nFROM BTC_DATA.BOT.TELEGRAM_SUBSCRIBERS \nWHERE CHAT_ID = '{{ $json.message.chat.id }}'\nAND IS_ACTIVE;"
+      },
+      "type": "n8n-nodes-base.snowflake",
+      "typeVersion": 1,
+      "position": [
+        176,
+        1664
+      ],
+      "id": "2095d7db-47c8-4f19-baf0-4d886359de68",
+      "name": "check subscription1",
+      "alwaysOutputData": true,
+      "credentials": {
+        "snowflake": {
+          "id": "08DSPiqy4VUOejq6",
+          "name": "Snowflake account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "71bef502-6096-41af-a192-b477a953591c",
+              "leftValue": "={{ $json.IS_ACTIVE }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "ae0e6b50-7216-4d04-908c-f752fad5f317",
+              "leftValue": "={{ $('Telegram Trigger').item.json.message.text }}",
+              "rightValue": "/start",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        400,
+        1664
+      ],
+      "id": "66ce990a-b7ff-4ec3-b088-cfb1a6ac5d8a",
+      "name": "If1"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "71bef502-6096-41af-a192-b477a953591c",
+              "leftValue": "={{ $('Telegram Trigger').item.json.message.text }}",
+              "rightValue": "/start",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            },
+            {
+              "id": "821fa747-4800-4398-8219-5688e33c19d9",
+              "leftValue": "={{ $('Telegram Trigger').item.json.message.text }}",
+              "rightValue": "/action",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            },
+            {
+              "id": "42a7e641-b8ac-4c7e-a27a-7b8330a7b3fa",
+              "leftValue": "={{ $('Telegram Trigger').item.json.message.text }}",
+              "rightValue": "/news",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            },
+            {
+              "id": "b4105e03-766e-456b-8734-c92e4142cee4",
+              "leftValue": "={{ $('Telegram Trigger').item.json.message.text }}",
+              "rightValue": "/price",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            },
+            {
+              "id": "52c54897-5a3c-400e-9766-4ab56a4e951b",
+              "leftValue": "={{ $('Telegram Trigger').item.json.message.text }}",
+              "rightValue": "/stop",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            },
+            {
+              "id": "b64bd1fa-9d08-4ade-b5ee-c4a80d31c935",
+              "leftValue": "={{ $('Telegram Trigger').item.json.message.text }}",
+              "rightValue": "/help",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        624,
+        1568
+      ],
+      "id": "73b654a2-32ae-4b4d-a1f2-f9da4db8c6f7",
+      "name": "If2"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
+        "text": "⚠️ Vous devez vous abonner aux alertes Bitcoin Strategy en envoyant /start",
+        "additionalFields": {
+          "appendAttribution": true
+        }
+      },
+      "id": "f3a4aa82-9064-4635-affa-78a7b5c5de40",
+      "name": "Not subscribed",
+      "type": "n8n-nodes-base.telegram",
+      "position": [
+        624,
+        2048
+      ],
+      "typeVersion": 1.2,
+      "webhookId": "7ffedb7c-8615-4ce8-9685-94ee8b60c617",
+      "credentials": {
+        "telegramApi": {
+          "id": "YOz9wYD3e4mXfWlw",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtMinute": 10
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        2608,
+        1152
+      ],
+      "id": "0b569fe9-da14-4f73-8bdc-a364d4fc5111",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT CHAT_ID, USERNAME\nFROM BTC_DATA.BOT.TELEGRAM_SUBSCRIBERS \nWHERE IS_ACTIVE = TRUE"
+      },
+      "type": "n8n-nodes-base.snowflake",
+      "typeVersion": 1,
+      "position": [
+        2832,
+        1152
+      ],
+      "id": "401c69af-bc80-4118-932a-e88edcb4f3d0",
+      "name": "Get All Active Subscribers",
+      "credentials": {
+        "snowflake": {
+          "id": "08DSPiqy4VUOejq6",
+          "name": "Snowflake account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        3056,
+        1152
+      ],
+      "id": "e4c484e3-cea4-4e44-a795-7fbf2e7e858d",
+      "name": "Loop Over Items",
+      "executeOnce": false,
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT EXECUTION_DATE, SIGNAL, CURRENT_SIGNAL, BTC_PRICE, MVRV_ZSCORE, NUPL_ZSCORE, COMBINED_ZSCORE, TOTAL_RETURN, BUY_HOLD_RETURN, OUTPERFORMANCE, MONTH_RETURN, MARKET_MONTH_RETURN, STRATEGY_MESSAGE FROM BTC_DATA.BOT.STRATEGY_RESULTS ORDER BY CREATED_TIMESTAMP DESC LIMIT 1"
+      },
+      "type": "n8n-nodes-base.snowflake",
+      "typeVersion": 1,
+      "position": [
+        3280,
+        1088
+      ],
+      "id": "c7ca2393-2960-4f67-a256-b5db5078dff1",
+      "name": "Get Latest Strategy for Broadcast",
+      "credentials": {
+        "snowflake": {
+          "id": "08DSPiqy4VUOejq6",
+          "name": "Snowflake account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "functionCode": "// Extract data from Snowflake result\nconst data = $input.item.json;\n\n// Get signal emoji\nfunction getSignalEmoji(signal) {\n  switch(signal) {\n    case 'LONG': return '🟢';\n    case 'SHORT': return '🔴';\n    case 'HOLD BTC': return '💎';\n    case 'HOLD FIAT': return '💵';\n    default: return '⚪';\n  }\n}\n\nconst emoji = getSignalEmoji(data.CURRENT_SIGNAL);\n\n// The STRATEGY_MESSAGE is now stored as a formatted string in Snowflake\nconst message = data.STRATEGY_MESSAGE;\n\nreturn {\n  message: message\n};"
+      },
+      "id": "b5e079d0-5a6f-4f2b-9fe3-04a054191a39",
+      "name": "Format Strategy Message1",
+      "type": "n8n-nodes-base.function",
+      "position": [
+        3504,
+        1088
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT CHAT_ID, USERNAME\nFROM BTC_DATA.BOT.TELEGRAM_SUBSCRIBERS \nWHERE IS_ACTIVE = TRUE"
+      },
+      "type": "n8n-nodes-base.snowflake",
+      "typeVersion": 1,
+      "position": [
+        2864,
+        816
+      ],
+      "id": "56279a03-0e14-4645-b825-4d1dc70f79af",
+      "name": "Get All Active Subscribers1",
+      "credentials": {
+        "snowflake": {
+          "id": "08DSPiqy4VUOejq6",
+          "name": "Snowflake account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        3088,
+        816
+      ],
+      "id": "47adb830-d98b-4af7-9235-61bac0ca2f51",
+      "name": "Loop Over Items1",
+      "executeOnce": false,
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT EXECUTION_DATE, SIGNAL, CURRENT_SIGNAL, BTC_PRICE, MVRV_ZSCORE, NUPL_ZSCORE, COMBINED_ZSCORE, TOTAL_RETURN, BUY_HOLD_RETURN, OUTPERFORMANCE, MONTH_RETURN, MARKET_MONTH_RETURN, STRATEGY_MESSAGE FROM BTC_DATA.BOT.STRATEGY_RESULTS ORDER BY CREATED_TIMESTAMP DESC LIMIT 1"
+      },
+      "type": "n8n-nodes-base.snowflake",
+      "typeVersion": 1,
+      "position": [
+        3312,
+        736
+      ],
+      "id": "77f63093-ec13-406d-9b71-1cfe6a202a74",
+      "name": "Get Latest Strategy for Broadcast1",
+      "credentials": {
+        "snowflake": {
+          "id": "08DSPiqy4VUOejq6",
+          "name": "Snowflake account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "functionCode": "// Extract data from Snowflake result\nconst data = $input.item.json;\n\n// Get signal emoji\nfunction getSignalEmoji(signal) {\n  switch(signal) {\n    case 'LONG': return '🟢';\n    case 'SHORT': return '🔴';\n    case 'HOLD BTC': return '💎';\n    case 'HOLD FIAT': return '💵';\n    default: return '⚪';\n  }\n}\n\nconst emoji = getSignalEmoji(data.CURRENT_SIGNAL);\n\n// The STRATEGY_MESSAGE is now stored as a formatted string in Snowflake\nconst message = data.STRATEGY_MESSAGE;\n\nreturn {\n  message: message\n};"
+      },
+      "id": "2a368e49-2067-47a7-910b-cd94577bad10",
+      "name": "Format Strategy Message2",
+      "type": "n8n-nodes-base.function",
+      "position": [
+        3536,
+        736
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        2640,
+        816
+      ],
+      "id": "83dbc68c-6b1e-4ac3-abfa-2bb8cd412d8b",
+      "name": "When clicking ‘Execute workflow’",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "content": "## Send announcements\nSend new chatbot updates to all subscribers"
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        2304,
+        800
+      ],
+      "id": "cc4f45ca-bed7-4c4c-b9fa-9930e364f085",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## Daily Strategy Action\nSend the recommended action returned by the strategy execution\n ",
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        2304,
+        1120
+      ],
+      "id": "4be96d56-ac30-404f-bc26-469449c26c33",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Get All Active Subscribers1').item.json.CHAT_ID }}",
+        "text": "=🚀 **MISE À JOUR MAJEURE TERMINÉE** 🚀\n\nVotre assistant BitLAB vient de recevoir une amélioration MASSIVE! La v2.0.0 Beta is OUT !\n\n🧠 **LLMs en arrière-plan**: Alimenté par Google Gemini & DeepSeek avec une mémoire de la conversation basé sur Postgres\n📊 **Données en direct**: Métriques temps réel, statut blockchain, données marché\n📈 **Analyse technique**: Graphiques, indicateurs & signaux de trading\n😊 **Social media tracking **: Stats réseaux sociaux & sentiment marché\n💰 **Données avancées **: Analyse OHLCV, carnets d'ordres en direct, ETF, ...\n🔗 **Insights blockchain**: Métriques de la blockchain\n\n**🎯 Nouveautés:**\n✅ Réponses IA plus intelligentes avec conscience contextuelle\n✅ Données fraîches mises à jour régulièrement\n✅ Capacités d'analyse de marché avancées\n✅ Sentiment social depuis Twitter, Reddit & plus\n✅ Indicateurs techniques & insights trading\n✅ Statut réseau blockchain temps réel\n\n**💡 Testez maintenant!** Demandez-moi:\n- \"A summary of the public sentiment last 3 hours\"\n- \"Montre-moi l'analyse technique\"\n- \"When will the next halving happen ?\"\n- \"Donne-moi le prix du Bitcoin ainsi que celui de ETH et XRP\"\n\nVotre compagnon de connaissance Bitcoin est maintenant plus puissant que jamais! 🔥\n\nTapez /help pour voir le récapitulatif des nouvelles fonctionnalités 📋",
+        "additionalFields": {
+          "parse_mode": "Markdown"
+        }
+      },
+      "id": "097967ea-5133-47ce-b7e6-ab64af3bbf86",
+      "name": "Send Custom Message",
+      "type": "n8n-nodes-base.telegram",
+      "position": [
+        3760,
+        816
+      ],
+      "typeVersion": 1.2,
+      "webhookId": "8a5fadf6-d706-4034-b832-add5464d710b",
+      "credentials": {
+        "telegramApi": {
+          "id": "YOz9wYD3e4mXfWlw",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Get All Active Subscribers').item.json.CHAT_ID }}",
+        "text": "={{ $json.message }}",
+        "additionalFields": {
+          "parse_mode": "Markdown"
+        }
+      },
+      "id": "1200b38f-a786-43d2-a8fe-6b4b90268e50",
+      "name": "Send Strategy Message2",
+      "type": "n8n-nodes-base.telegram",
+      "position": [
+        3728,
+        1152
+      ],
+      "typeVersion": 1.2,
+      "webhookId": "8a5fadf6-d706-4034-b832-add5464d710b",
+      "credentials": {
+        "telegramApi": {
+          "id": "YOz9wYD3e4mXfWlw",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        560,
+        2480
+      ],
+      "id": "4000b29b-ee07-4ac9-864d-30a825e4b2a4",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "4YX1I8s5g59BBKdk",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Expert in general Bitcoin knowledge, education, history, technology, and ecosystem",
+        "text": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Prompt__User_Message_', ``, 'string') }}",
+        "options": {
+          "systemMessage": "You are a Bitcoin General Knowledge Expert with comprehensive understanding of:\n      \n      EDUCATIONAL TOPICS:\n      - Bitcoin basics and how it works\n      - Blockchain technology fundamentals\n      - Mining process and proof of work\n      - Wallet types and security best practices\n      - How to buy, store, and use Bitcoin\n      - Transaction fees and confirmation times\n      \n      HISTORICAL & CULTURAL:\n      - Bitcoin's history and key milestones\n      - Satoshi Nakamoto and the whitepaper\n      - Major events (Mt. Gox, halvings, forks)\n      - Bitcoin culture and community\n      - Notable figures in Bitcoin\n      \n      TECHNICAL CONCEPTS:\n      - Cryptographic principles\n      - Consensus mechanisms\n      - Lightning Network and Layer 2\n      - Bitcoin Improvement Proposals (BIPs)\n      - Privacy and anonymity features\n      \n      ECOSYSTEM & ADOPTION:\n      - Bitcoin ecosystem participants\n      - Institutional adoption trends\n      - Regulatory landscape globally\n      - Use cases and applications\n      - Common misconceptions and myths\n      - Comparison with other cryptocurrencies\n      \n      PRACTICAL GUIDANCE:\n      - Best practices for beginners\n      - Common mistakes to avoid\n      - Resources for learning\n      - Tax considerations\n      - Security recommendations"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agentTool",
+      "typeVersion": 2.2,
+      "position": [
+        816,
+        2480
+      ],
+      "id": "89762470-29db-49ad-9b75-e4ccf9c007de",
+      "name": "General questions"
+    },
+    {
+      "parameters": {
+        "toolDescription": "Expert in Bitcoin technical analysis, chart patterns, and indicators. He has the hourly technical idnicators values for last 3 days",
+        "text": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Prompt__User_Message_', ``, 'string') }}",
+        "options": {
+          "systemMessage": "You are a Bitcoin Technical Analysis Expert specializing in:\n      - Chart pattern recognition (triangles, flags, head & shoulders)\n      - Technical indicators (RSI, MACD, Bollinger Bands, Moving Averages)\n      - Support and resistance levels\n      - Fibonacci retracements\n      - Volume analysis\n      - Market structure analysis"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agentTool",
+      "typeVersion": 2.2,
+      "position": [
+        1104,
+        2480
+      ],
+      "id": "f3590dcb-2839-473e-83b6-ff452a0f29cb",
+      "name": "Technical Analyst"
+    },
+    {
+      "parameters": {
+        "toolDescription": "Expert in Bitcoin blockchain metrics and on-chain analysis",
+        "text": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Prompt__User_Message_', ``, 'string') }}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agentTool",
+      "typeVersion": 2.2,
+      "position": [
+        1488,
+        2480
+      ],
+      "id": "3d1469c8-d2fb-48e5-8561-5baaa91694bc",
+      "name": "Blockchain Analyst"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "403d07e6-8abe-451c-a843-3d57c32462e7",
+        "responseMode": "responseNode",
+        "options": {
+          "rawBody": false
+        }
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        624,
+        2240
+      ],
+      "id": "02e92709-006e-4763-a22b-118944fda504",
+      "name": "Webhook1",
+      "webhookId": "403d07e6-8abe-451c-a843-3d57c32462e7"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        3136,
+        2096
+      ],
+      "id": "05205cb4-882f-4e83-86e4-291c5088b84b",
+      "name": "Respond to Webhook1"
+    },
+    {
+      "parameters": {
+        "toolDescription": "Specialist in real-time Bitcoin market live price , hourly and daily OHLCV, trading signals and other cryptocurrencies live prices and some exchanges Order books. Have insights on NASDAQ, DXY, VIX and GOLD price mouvements",
+        "text": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Prompt__User_Message_', ``, 'string') }}",
+        "options": {
+          "systemMessage": "You are a Bitcoin Market Data Specialist. You provide real-time market information including:\n      - Current price across multiple exchanges\n      - 24h/7d/30d price changes\n      - Trading volume analysis\n      - Market cap and dominance\n      - Order book depth\n      - Funding rates and open interest\n      - Correlations between Bitcoin and key market indicators like NASDAQ DXY VIX GOLD price (you have daily historical data)"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agentTool",
+      "typeVersion": 2.2,
+      "position": [
+        2320,
+        2480
+      ],
+      "id": "8d58c530-495c-41c7-9538-7e9afbfe495d",
+      "name": "Market Data Analyst"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-5-mini",
+          "mode": "list",
+          "cachedResultName": "gpt-5-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        896,
+        2688
+      ],
+      "id": "8df5952b-3c86-4875-b4f1-6503f1440df0",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "sy4EsQV8G0ouTuEq",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Powered by IntoTheBlock, Retrieve the latest trading signal information for Bitcoin.",
+        "url": "https://min-api.cryptocompare.com/data/tradingsignals/intotheblock/latest?fsym=BTC&api_key=04332ea0e83e70ad6830bd9d78a34a03d0d78a953752d87e1b7d3fce72288673",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [
+        1952,
+        2688
+      ],
+      "id": "e7057bfe-52ec-4fca-bf4c-abf70b05731c",
+      "name": "Trading signals"
+    },
+    {
+      "parameters": {
+        "toolDescription": "Get open, high, low, close, volumefrom and volumeto from the hourly historical data last 1000 hours\nHistorical (inc. CCCAGG)\n\n",
+        "url": "https://min-api.cryptocompare.com/data/v2/histohour?fsym=BTC&tsym=USD&limit=1000",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [
+        2080,
+        2688
+      ],
+      "id": "a4618262-6408-4668-b043-4ff40ef01108",
+      "name": "Hourly OHLCV"
+    },
+    {
+      "parameters": {
+        "toolDescription": "Get open, high, low, close, volumefrom and volumeto from the daily historical data last 365 days\nHistorical (inc. CCCAGG)\n\n",
+        "url": "https://min-api.cryptocompare.com/data/v2/histoday?fsym=BTC&tsym=USD&limit=365",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [
+        2208,
+        2688
+      ],
+      "id": "f57ea945-753a-4d94-afc6-033a4c500fb9",
+      "name": "Daily OHLCV"
+    },
+    {
+      "parameters": {
+        "toolDescription": "Get all the current trading info (price, vol, open, high, low etc) of BTC,ETH,XRP,SOL,BNB,ADA,USDT",
+        "url": "https://min-api.cryptocompare.com/data/pricemultifull?fsyms=BTC,ETH,XRP,SOL,BNB,ADA,USDT&tsyms=USD",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [
+        2336,
+        2688
+      ],
+      "id": "f7e32397-3428-428a-b0b0-70087536b1f1",
+      "name": "Cryptocurrecies data"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatDeepSeek",
+      "typeVersion": 1,
+      "position": [
+        1824,
+        2688
+      ],
+      "id": "393c4c4b-6fc5-4863-9744-25ce0c4a4e0a",
+      "name": "DeepSeek Chat Model",
+      "credentials": {
+        "deepSeekApi": {
+          "id": "uUVcgdXZ2qNmUSCR",
+          "name": "DeepSeek account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Comprehensive Bitcoin analytics tool\nDescription: Fetches detailed Bitcoin market and technical data including prices (realized, market), market value ratios (MVRV), network utilization metrics (NUPL), supply dynamics, fund flows (ETF, institutional), reserves data, volatility ratios, and risk indicators. Provides 365 days of historical data ordered by date.",
+        "operation": "executeQuery",
+        "query": "SELECT DATE,REALIZED_PRICE,MARKET_PRICE,MVRV,NUPL,SUPPLY_CURRENT,CDD_90DMA,ETF_FLOW,OUT_FLOWS, RESERVES,NVT_RATIO,PUELL_MULTIPLE,RESERVE_RISK,HASHRATE,THERMO_CAP,TRUE_MARKET_MEAN\n,VOCDD  FROM BTC_DATA.DATA.BITCOIN_DATA ORDER BY DATE DESC LIMIT 30;"
+      },
+      "type": "n8n-nodes-base.snowflakeTool",
+      "typeVersion": 1,
+      "position": [
+        1568,
+        2688
+      ],
+      "id": "ff3ebd98-0e40-40ef-b3fa-bdf67cf98479",
+      "name": "Snowflake",
+      "credentials": {
+        "snowflake": {
+          "id": "08DSPiqy4VUOejq6",
+          "name": "Snowflake account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Powered by IntoTheBlock, retrieve the latest aggregated blockchain live metrics for Bitcoin",
+        "url": "https://min-api.cryptocompare.com/data/blockchain/latest?fsym=BTC&api_key=fb4f8e26d4a0fec6b05a9ae93d937f5697519d50a8f48d0f228901056c6d4bf5",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [
+        1696,
+        2688
+      ],
+      "id": "628a9242-458c-4312-88a1-f123796681b6",
+      "name": "Blockchain Data"
+    },
+    {
+      "parameters": {
+        "toolDescription": "latest order book Level 1 bid/ask values for coinbase",
+        "url": "https://min-api.cryptocompare.com/data/ob/l1/top?fsyms=BTC&tsyms=USDT&e=coinbase&api_key=fb4f8e26d4a0fec6b05a9ae93d937f5697519d50a8f48d0f228901056c6d4bf5",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [
+        2464,
+        2688
+      ],
+      "id": "d7d8ce0f-07df-413a-a9fd-c0f4ca8cc1d6",
+      "name": "Coinbase OB"
+    },
+    {
+      "parameters": {
+        "toolDescription": "latest order book Level 1 bid/ask values for binance",
+        "url": "https://min-api.cryptocompare.com/data/ob/l1/top?fsyms=BTC&tsyms=USDT&e=binance&api_key=fb4f8e26d4a0fec6b05a9ae93d937f5697519d50a8f48d0f228901056c6d4bf5",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [
+        2592,
+        2688
+      ],
+      "id": "913ba535-e2c0-4318-8cf2-3d7c9d914eb7",
+      "name": "Binance OB"
+    },
+    {
+      "parameters": {
+        "toolDescription": "latest order book Level 1 bid/ask values for kraken",
+        "url": "https://min-api.cryptocompare.com/data/ob/l1/top?fsyms=BTC&tsyms=USDT&e=kraken&api_key=fb4f8e26d4a0fec6b05a9ae93d937f5697519d50a8f48d0f228901056c6d4bf5",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [
+        2720,
+        2688
+      ],
+      "id": "f6b4177f-6fe1-4207-ad30-212d5d2604eb",
+      "name": "Kraken OB"
+    },
+    {
+      "parameters": {
+        "toolDescription": "latest order book Level 1 bid/ask values for bybit",
+        "url": "https://min-api.cryptocompare.com/data/ob/l1/top?fsyms=BTC&tsyms=USDT&e=bybit&api_key=fb4f8e26d4a0fec6b05a9ae93d937f5697519d50a8f48d0f228901056c6d4bf5",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [
+        2848,
+        2688
+      ],
+      "id": "fe3c53c5-9b4d-4153-88b5-14391d75aa8f",
+      "name": "Bybit OB"
+    },
+    {
+      "parameters": {
+        "toolDescription": "Latest 10 news related to Bitcoin",
+        "url": "https://data-api.coindesk.com/news/v1/article/list?lang=EN&limit=10&categories=BTC&api_key=fb4f8e26d4a0fec6b05a9ae93d937f5697519d50a8f48d0f228901056c6d4bf5",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [
+        3232,
+        2688
+      ],
+      "id": "dce85adb-9e89-4bf0-a6e3-3327b2900f62",
+      "name": "News"
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": " Retrieves hourly Bitcoin Fear & Greed Index data including fear/greed scores and categories from analytics tables. Limited to 24 hours of recent data ordered by datetime hour in descending order.",
+        "operation": "executeQuery",
+        "query": "SELECT DATETIME_HOUR,FEAR_GREED_SCORE,FEAR_GREED_CATEGORY FROM BTC_DATA.ANALYTICS.HOURLY_FNG ORDER BY DATETIME_HOUR DESC LIMIT 24; \n"
+      },
+      "type": "n8n-nodes-base.snowflakeTool",
+      "typeVersion": 1,
+      "position": [
+        3360,
+        2688
+      ],
+      "id": "5ffb7030-650b-4f0f-9cdc-474d45cdefc3",
+      "name": "HOURLY FNG",
+      "credentials": {
+        "snowflake": {
+          "id": "08DSPiqy4VUOejq6",
+          "name": "Snowflake account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Daily Fear & Greed analysis tool\nDescription: Fetches daily Fear & Greed Index analytics including analysis dates, total hours analyzed, daily fear/greed scores, and fear/greed categories. Provides 30 days of historical data ordered by analysis date in descending order.",
+        "operation": "executeQuery",
+        "query": "SELECT ANALYSIS_DATE,TOTAL_HOURS_ANALYZED,DAILY_FEAR_GREED_SCORE,FEAR_GREED_CATEGORY\n FROM BTC_DATA.ANALYTICS.DAILY_FNG ORDER BY ANALYSIS_DATE DESC LIMIT 30; \n"
+      },
+      "type": "n8n-nodes-base.snowflakeTool",
+      "typeVersion": 1,
+      "position": [
+        3488,
+        2688
+      ],
+      "id": "849387b3-8322-4785-9107-6820857c3085",
+      "name": "DAILY FNG",
+      "credentials": {
+        "snowflake": {
+          "id": "08DSPiqy4VUOejq6",
+          "name": "Snowflake account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $('Edit Fields1').item.json.prompt }}",
+        "options": {
+          "systemMessage": "=You are BitcoinGPT, an expert Bitcoin market analyst with comprehensive knowledge. You have this live data about the market (from newhedge.io):\n{{ JSON.stringify($('HTML').item.json, null, 2) }}\n\nPRIORITY: Always check if you can answer the user's question directly using the live data provided above FIRST. Only route to specialist agents if the information is NOT available in your live data. Also, if possible, give the data source and the date of data in your response based on the http request source. Also, try to limit your answer to 4096 characters maximum.\n\nROUTING RULES:\n1. **FIRST**: Check if the answer exists in your live data - if YES, answer directly\n2. **ONLY IF** the data is missing or insufficient, then route to appropriate specialist agents:\n\nAVAILABLE SPECIALIST AGENTS:\n- Market Data Analyst - Current prices, volume, market cap, trading data\n- Technical Analyst - Charts, indicators, patterns, support/resistance  \n- Blockchain Analyst - Blockchain metrics, network data, whale movements\n- Social & News Analyst - Social sentiment, fear & greed, news reader\n- General questions agent - Bitcoin education, economics, finance, how-to guides\n\nEXAMPLES:\n- User asks \"What is Binance Trading Dominance?\" → Answer directly: \"39.66%\" (from your live data)\n- User asks \"Show me a price chart\" → Route to technical Analyst\n- User asks \"What's the current sentiment?\" or \"Give me latest news summary\" → Route to Social & News Analyst\n- User asks \"Who created Bitcoin ? And what was the purpose ?\" → Route to General questions agent\n\nRemember: Your live data contains most live Bitcoin metrics. Use it first before routing to specialists. If you need one of these metrics:  MVRV,NUPL,CDD_90DMA,PUELL_MULTIPLE,RESERVE_RISK,THERMO_CAP,TRUE_MARKET_MEAN use blockchain analyst.\n\nTo avoid issues; limit your response into 4096 characters maximum."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.1,
+      "position": [
+        2128,
+        2000
+      ],
+      "id": "fc02b692-6697-46e5-9fb8-0721093192c7",
+      "name": "Main Orchestrator Agent"
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Fetches basic financial market data including dates, NASDAQ values, day-over-day changes (DXY), VIX volatility index, and gold prices from Bitcoin financial market data tables. Limited to 365 days of data with date ordering.",
+        "operation": "executeQuery",
+        "query": "SELECT DATE, NASDAQ, DXY, VIX, GOLD FROM BTC_DATA.DATA.FINANCIAL_MARKET_DATA ORDER BY DATE DESC LIMIT 365; "
+      },
+      "type": "n8n-nodes-base.snowflakeTool",
+      "typeVersion": 1,
+      "position": [
+        2976,
+        2688
+      ],
+      "id": "5779c770-8462-46c7-83d2-fdf0f610322b",
+      "name": "FINDATA",
+      "credentials": {
+        "snowflake": {
+          "id": "08DSPiqy4VUOejq6",
+          "name": "Snowflake account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "extractHtmlContent",
+        "extractionValues": {
+          "values": [
+            {
+              "key": "Bitcoin Dominance",
+              "cssSelector": "#btc_dominance"
+            },
+            {
+              "key": "Market Cap",
+              "cssSelector": "p:contains(\"Market Cap\") + p"
+            },
+            {
+              "key": "Sats per Dollar",
+              "cssSelector": "p:contains(\"Sats per Dollar\") + p"
+            },
+            {
+              "key": "Block Height",
+              "cssSelector": ".block-height"
+            },
+            {
+              "key": "Revenue (BTC) (24hrs)",
+              "cssSelector": "#dailyRevenueBtc"
+            },
+            {
+              "key": "Revenue (USD) (24hrs)",
+              "cssSelector": "#dailyRevenueUsd"
+            },
+            {
+              "key": "Circulating Supply",
+              "cssSelector": "#supply"
+            },
+            {
+              "key": "Percentage Issued",
+              "cssSelector": "#percentIssued"
+            },
+            {
+              "key": "Issuance Remaining",
+              "cssSelector": "#IssuanceRemaining"
+            },
+            {
+              "key": "Hashrate",
+              "cssSelector": "#hashrate"
+            },
+            {
+              "key": "Hashprice",
+              "cssSelector": "#HashPrice"
+            },
+            {
+              "key": "Public Company Holdings",
+              "cssSelector": ".dashboard-primary-text"
+            },
+            {
+              "key": "Private Company Holdings",
+              "cssSelector": ".dashboard-primary-text"
+            },
+            {
+              "key": "BTC Held in Treasuries",
+              "cssSelector": "#btcGovernments"
+            },
+            {
+              "key": "Treasury Value (USD)",
+              "cssSelector": "#usdGovernments"
+            },
+            {
+              "key": "Number of UTXOs in Profit",
+              "cssSelector": ".dashboard-subcol p:contains(\"Number of UTXOs in Profit\") + p"
+            },
+            {
+              "key": "Number of UTXOs in Loss",
+              "cssSelector": ".dashboard-subcol p:contains(\"Number of UTXOs in Loss\") + p"
+            },
+            {
+              "key": "Percent UTXOs in Profit",
+              "cssSelector": ".dashboard-subcol p:contains(\"Percent UTXOs in Profit\") + p"
+            },
+            {
+              "key": "Transactions Per Second",
+              "cssSelector": "#transactions_per_second"
+            },
+            {
+              "key": "Transactions Per Block",
+              "cssSelector": "#transactions_per_block"
+            },
+            {
+              "key": "Transactions Per Day",
+              "cssSelector": "#transactions_per_day"
+            },
+            {
+              "key": "Transactions Current Month",
+              "cssSelector": ".dashboard-subcol p:contains(\"Current Month\") + p"
+            },
+            {
+              "key": "Total Transactions All Time",
+              "cssSelector": "#total_transactions"
+            },
+            {
+              "key": "Open Interest",
+              "cssSelector": "#open_interest"
+            },
+            {
+              "key": "ATH Price",
+              "cssSelector": "#AthPriceMain"
+            },
+            {
+              "key": "Price Drawdown Since ATH",
+              "cssSelector": "p:contains(\"Price Drawdown Since ATH\") + p"
+            },
+            {
+              "key": "Days Since ATH",
+              "cssSelector": ".drawdown-days-since-ath"
+            },
+            {
+              "key": "ATH Date",
+              "cssSelector": ".ath-date"
+            },
+            {
+              "key": "Daily BTC Trading Vol",
+              "cssSelector": "p:contains(\"Daily BTC Trading Vol\") + p"
+            },
+            {
+              "key": "Binance Trading Dominance",
+              "cssSelector": "p:contains(\"Binance Trading Dominance\") + p"
+            },
+            {
+              "key": "BTC Pairs Trading Dominance ",
+              "cssSelector": "p:contains(\"BTC Pairs Trading Dominance\") + p"
+            },
+            {
+              "key": "US Crypto Trading Vol",
+              "cssSelector": "p:contains(\"US Crypto Trading Vol\") + p"
+            },
+            {
+              "key": "Offshore Crypto Trading Vol",
+              "cssSelector": "p:contains(\"Offshore Crypto Trading Vol\") + p"
+            },
+            {
+              "key": "Daily Price Performance",
+              "cssSelector": "#daily_price_performance"
+            },
+            {
+              "key": "Weekly Price Performance",
+              "cssSelector": "#weekly_price_performance"
+            },
+            {
+              "key": "Monthly Price Performance",
+              "cssSelector": "#monthly_price_performance"
+            },
+            {
+              "key": "Quarterly Price Performance",
+              "cssSelector": "#quarterly_price_performance"
+            },
+            {
+              "key": "Gold Price",
+              "cssSelector": "p:contains(\"Gold Price\") + p"
+            },
+            {
+              "key": "Gold Marketcap",
+              "cssSelector": "p:contains(\"Gold Marketcap\") + p"
+            },
+            {
+              "key": "Bitcoin vs Gold Market Cap",
+              "cssSelector": "p:contains(\"Bitcoin vs Gold Market Cap\") + p"
+            },
+            {
+              "key": "Realized Price",
+              "cssSelector": "p:contains(\"Realized Price\") + p"
+            },
+            {
+              "key": "Realized Marketcap",
+              "cssSelector": "p:contains(\"Realized Marketcap\") + p"
+            },
+            {
+              "key": "STH Realized Price",
+              "cssSelector": "p:contains(\"STH Realized Price\") + p"
+            },
+            {
+              "key": "LTH Realized Price",
+              "cssSelector": "p:contains(\"LTH Realized Price\") + p"
+            },
+            {
+              "key": "New Addresses",
+              "cssSelector": "p:contains(\"New Addresses\") + p"
+            },
+            {
+              "key": "Balance Between 1 sat and .01 BTC",
+              "cssSelector": "p:contains(\"Balance Between 1 sat and .01 BTC\") + p"
+            },
+            {
+              "key": "Balance Between .01 BTC and 1 BTC",
+              "cssSelector": "p:contains(\"Balance Between .01 BTC and 1 BTC\") + p"
+            },
+            {
+              "key": "Balance Between 1 BTC and 10 BTC",
+              "cssSelector": "p:contains(\"Balance Between 1 BTC and 10 BTC\") + p"
+            },
+            {
+              "key": "Balance Between 10 BTC and 100 BTC",
+              "cssSelector": "p:contains(\"Balance Between 10 BTC and 100 BTC\") + p"
+            },
+            {
+              "key": "Balance Between 100 BTC and 1,000 BTC",
+              "cssSelector": "p:contains(\"Balance Between 100 BTC and 1,000 BTC\") + p"
+            },
+            {
+              "key": "Long Term Holder Supply",
+              "cssSelector": "p:contains(\"Long Term Holder Supply\") + p"
+            },
+            {
+              "key": "Short Term Holder Supply",
+              "cssSelector": "p:contains(\"Short Term Holder Supply\") + p"
+            },
+            {
+              "key": "Percent Supply in Profit",
+              "cssSelector": "p:contains(\"Percent Supply in Profit\") + p"
+            },
+            {
+              "key": "Total Supply in Profit",
+              "cssSelector": "p:contains(\"Total Supply in Profit\") + p"
+            },
+            {
+              "key": "Total Supply in Loss",
+              "cssSelector": "p:contains(\"Total Supply in Loss\") + p"
+            },
+            {
+              "key": "Coin Days Destroyed",
+              "cssSelector": "p:contains(\"Coin Days Destroyed\") + p"
+            },
+            {
+              "key": "MVRV Z-Score",
+              "cssSelector": "p:contains(\"MVRV Z-Score\") + p"
+            },
+            {
+              "key": "NVT Ratio",
+              "cssSelector": "p:contains(\"NVT Ratio\") + p"
+            },
+            {
+              "key": "RHODL Ratio",
+              "cssSelector": "p:contains(\"RHODL Ratio\") + p"
+            },
+            {
+              "key": "Projected Next Halving Date",
+              "cssSelector": "p:contains(\"Projected Date\") + p"
+            },
+            {
+              "key": "Halving at Block",
+              "cssSelector": "p:contains(\"Halving at Block\") + p"
+            },
+            {
+              "key": "Blocks Remaining",
+              "cssSelector": "p:contains(\"Blocks Remaining\") + p"
+            },
+            {
+              "key": "BTC Until Halving",
+              "cssSelector": "p:contains(\"BTC Until Halving\") + p"
+            },
+            {
+              "key": "DEFI - Hashdex",
+              "cssSelector": "p:contains(\"DEFI - Hashdex\") + p"
+            },
+            {
+              "key": "BITO - ProShares",
+              "cssSelector": "p:contains(\"BITO - ProShares\") + p"
+            },
+            {
+              "key": "BTF - Valkyrie",
+              "cssSelector": "p:contains(\"BTF - Valkyrie\") + p"
+            },
+            {
+              "key": "BITS - Global X",
+              "cssSelector": "p:contains(\"BITS - Global X\") + p"
+            },
+            {
+              "key": "ARKA - Ark/21 Shares",
+              "cssSelector": "p:contains(\"ARKA - Ark/21 Shares\") + p"
+            },
+            {
+              "key": "BITC - Bitwise",
+              "cssSelector": "p:contains(\"BITC - Bitwise\") + p"
+            },
+            {
+              "key": "BETH - ProShares",
+              "cssSelector": "p:contains(\"BETH - ProShares\") + p"
+            },
+            {
+              "key": "BETE - ProShares",
+              "cssSelector": "p:contains(\"BETE - ProShares\") + p"
+            },
+            {
+              "key": "ARKC - Ark/21 Shares",
+              "cssSelector": "p:contains(\"ARKC - Ark/21 Shares\") + p"
+            },
+            {
+              "key": "ARKY - Ark/21 Shares",
+              "cssSelector": "p:contains(\"ARKY - Ark/21 Shares\") + p"
+            },
+            {
+              "key": "Spot Trading Volume",
+              "cssSelector": "p:contains(\"Spot Trading Volume\") + p"
+            },
+            {
+              "key": "Futures Trading Volume",
+              "cssSelector": "p:contains(\"Futures Trading Volume\") + p"
+            },
+            {
+              "key": "Total Spot AUM",
+              "cssSelector": "p:contains(\"Total Spot AUM\") + p"
+            },
+            {
+              "key": "Total BTC Holdings",
+              "cssSelector": "p:contains(\"Total BTC Holdings\") + p"
+            },
+            {
+              "key": "ARKB - ARK Invest",
+              "cssSelector": "p:contains(\"ARKB - ARK Invest\") + p"
+            },
+            {
+              "key": "BITB - Bitwise",
+              "cssSelector": "p:contains(\"BITB - Bitwise\") + p"
+            },
+            {
+              "key": "BRRR - Valkyrie",
+              "cssSelector": "p:contains(\"BRRR - Valkyrie\") + p"
+            },
+            {
+              "key": "BTCO - Invesco / Galaxy",
+              "cssSelector": "p:contains(\"BTCO - Invesco / Galaxy\") + p"
+            },
+            {
+              "key": "BTCW - WisdomTree",
+              "cssSelector": "p:contains(\"BTCW - WisdomTree\") + p"
+            },
+            {
+              "key": "EZBC - Franklin Templeton",
+              "cssSelector": "p:contains(\"EZBC - Franklin Templeton\") + p"
+            },
+            {
+              "key": "FBTC - Fidelity",
+              "cssSelector": "p:contains(\"FBTC - Fidelity\") + p"
+            },
+            {
+              "key": "GBTC - Grayscale",
+              "cssSelector": "p:contains(\"GBTC - Grayscale\") + p"
+            },
+            {
+              "key": "HODL - VanEck",
+              "cssSelector": "p:contains(\"HODL - VanEck\") + p"
+            },
+            {
+              "key": "IBIT - BlackRock",
+              "cssSelector": "p:contains(\"IBIT - BlackRock\") + p"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.html",
+      "typeVersion": 1.2,
+      "position": [
+        1776,
+        2000
+      ],
+      "id": "e96d841d-caa8-4b86-a14b-51259cde4eb5",
+      "name": "HTML"
+    },
+    {
+      "parameters": {
+        "toolDescription": "Returns daily social stats data for Bitcoin for last month",
+        "url": "https://min-api.cryptocompare.com/data/social/coin/histo/day?coinId=1182&limit=30&api_key=fb4f8e26d4a0fec6b05a9ae93d937f5697519d50a8f48d0f228901056c6d4bf5",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [
+        3616,
+        2688
+      ],
+      "id": "ba912109-c627-4d7b-b9cc-6c4f33a9e212",
+      "name": "Monthly Social Stats"
+    },
+    {
+      "parameters": {
+        "toolDescription": "Returns latest social stats data for Bitcoin network",
+        "url": "https://min-api.cryptocompare.com/data/social/coin/latest?coinId=1182&api_key=fb4f8e26d4a0fec6b05a9ae93d937f5697519d50a8f48d0f228901056c6d4bf5",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [
+        3744,
+        2688
+      ],
+      "id": "148de9ce-7a5e-493e-9b0f-fd003f6433de",
+      "name": "Latest Social stats"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.0-flash-thinking-exp-1219",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        1056,
+        2688
+      ],
+      "id": "7ac6f7bd-3f7d-4612-8804-384d6b32e827",
+      "name": "Google Gemini Chat Model1",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "4YX1I8s5g59BBKdk",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatDeepSeek",
+      "typeVersion": 1,
+      "position": [
+        1440,
+        2688
+      ],
+      "id": "97383b25-a9c3-439f-b1ff-2458d8e1232e",
+      "name": "DeepSeek Chat Model1",
+      "credentials": {
+        "deepSeekApi": {
+          "id": "uUVcgdXZ2qNmUSCR",
+          "name": "DeepSeek account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.0-flash",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        3104,
+        2688
+      ],
+      "id": "f7228476-6bad-46db-a474-9eb00b312843",
+      "name": "Google Gemini Chat Model2",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "4YX1I8s5g59BBKdk",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "603f5447-bada-4e5b-aa07-a643cd361c30",
+              "name": "prompt",
+              "value": "={{ $json.body?.message || $('Telegram Trigger').item.json.message.text || $json.message || \"No prompt provided\" }}\n",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1296,
+        2000
+      ],
+      "id": "c66c7f9b-0462-4e68-b243-1681b7648d3e",
+      "name": "Edit Fields1",
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
+        "text": "={{ $json.text }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        3712,
+        2096
+      ],
+      "id": "81b56b5c-9e45-432b-baff-728c160a0728",
+      "name": "Send a text message1",
+      "webhookId": "04847a35-4b59-430d-afba-415bc71872b9",
+      "credentials": {
+        "telegramApi": {
+          "id": "YOz9wYD3e4mXfWlw",
+          "name": "Telegram account"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "b3dbc238-6df7-4ef8-820d-b51f04184b19",
+              "leftValue": "={{ $('Merge').item.json.source }}",
+              "rightValue": "telegram",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        2912,
+        2000
+      ],
+      "id": "ed68d49d-7e0d-4fae-bdab-5dccfb2fd032",
+      "name": "If3"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('Merge').item.json.ChatId }}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+      "typeVersion": 1.3,
+      "position": [
+        688,
+        2480
+      ],
+      "id": "1538896f-7e33-4dbe-bea2-a524e59c908f",
+      "name": "Postgres Chat Memory",
+      "credentials": {
+        "postgres": {
+          "id": "IFhKRIZZClg73wqQ",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {}
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        2720,
+        1456
+      ],
+      "id": "cab796a4-c078-408c-818e-f5aa2b83adc2",
+      "name": "Schedule Trigger1"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "TRUNCATE TABLE n8n_chat_histories;\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        2960,
+        1440
+      ],
+      "id": "4c95600c-6548-4795-9aca-179d5a110b34",
+      "name": "Execute a SQL query",
+      "credentials": {
+        "postgres": {
+          "id": "IFhKRIZZClg73wqQ",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Clean chatbot memory\n",
+        "height": 80
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        2368,
+        1440
+      ],
+      "id": "e2d8b27c-e053-4708-a839-b7539733ae0d",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
+        "text": "📋 **AIDE - Bot BitLAB v2.0.0**\n\n**📊 COMMANDES PRINCIPALES:**\n/start - Démarrer et s'abonner\n/price - Prix Bitcoin temps réel\n/news - Dernières actualités Bitcoin\n/action - Signal de trading actuel\n/stop - Se désabonner\n/help - Afficher cette aide\n\n**💬 QUESTIONS DIRECTES:**\nVous pouvez me poser des questions en langage naturel:\n\n- \"Quel est le prix de Bitcoin?\"\n- \"What is your technical analysis of the Bitcoin market ?\"\n- \"Give me the current dominance of Bitcoin in crypto market ?\"\n- \"Quel est le sentiment du marché?\"\n- \"Summarize the onchain metrics\"\n- \"Analyse du volume de trading\"\n- \"Hashrate Bitcoin actuel\"\n- \"When was the last ATH ?\"\n- \"Donne-moi le prix actuel du Bitcoin ainsi que celui de ETH et XRP\"\n\n**⏰ ALERTES AUTOMATIQUES:**\nVous recevez les signaux quotidiens à minuit (UTC+2)\n\n⚠️ **Version Beta** - Vos retours nous aident à améliorer notre projet!",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1072,
+        1808
+      ],
+      "id": "00a96f3b-8a83-460d-9b82-902c15fec5d3",
+      "name": "Send a text message2",
+      "webhookId": "b63b32ca-d351-4fa5-8926-6d69e515db61",
+      "credentials": {
+        "telegramApi": {
+          "id": "YOz9wYD3e4mXfWlw",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "openai/gpt-oss-20b",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        3424,
+        2320
+      ],
+      "id": "06ef6cdc-d18c-4eb2-a3c2-a8206660f243",
+      "name": "Groq Chat Model",
+      "credentials": {
+        "groqApi": {
+          "id": "E3ByPi2PUMeiTyBt",
+          "name": "Groq account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.output }}",
+        "messages": {
+          "messageValues": [
+            {
+              "message": "Résume ce message sans changeant la langue pour Telegram:|CONTRAINTES: - Maximum 4000 caractères - Format lisible sur mobile - Conserve les données clés (prix, indicateurs, signaux) - Utilise des emojis mais sans exagérations - Structure claire et sans intro banale (Voici une version résumée/ voici une version pour telegram,...) passe directe le message"
+            }
+          ]
+        },
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.7,
+      "position": [
+        3360,
+        2096
+      ],
+      "id": "cfc13c6c-0957-4bec-a2ea-854234d62511",
+      "name": "Basic LLM Chain"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "8adb079c-e01f-49be-914f-b588a8664437",
+              "leftValue": "={{ $json.output.length }}",
+              "rightValue": 4000,
+              "operator": {
+                "type": "number",
+                "operation": "lt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        3136,
+        1904
+      ],
+      "id": "610a1353-0fe9-4479-97d6-3bf87e4a6184",
+      "name": "If4"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
+        "text": "={{ $json.text }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        3712,
+        1696
+      ],
+      "id": "0da77205-bccc-492e-af5d-8474e1accaa3",
+      "name": "Send a text message3",
+      "webhookId": "04847a35-4b59-430d-afba-415bc71872b9",
+      "credentials": {
+        "telegramApi": {
+          "id": "YOz9wYD3e4mXfWlw",
+          "name": "Telegram account"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Retrieves all available technical indicator data from Bitcoin hourly technical analysis tables. Provides comprehensive technical metrics ordered by datetime in descending order, limited to 72 records (approximately 3 days of hourly data).",
+        "operation": "executeQuery",
+        "query": "SELECT * FROM BTC_DATA.DATA.HOURLY_TA ORDER BY DATETIME DESC LIMIT 72; "
+      },
+      "type": "n8n-nodes-base.snowflakeTool",
+      "typeVersion": 1,
+      "position": [
+        1184,
+        2688
+      ],
+      "id": "101a4911-0c02-42a6-9b9f-4094ec49952f",
+      "name": "HOURLY_TECHNICAL_INDICATORS",
+      "credentials": {
+        "snowflake": {
+          "id": "08DSPiqy4VUOejq6",
+          "name": "Snowflake account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Retrieves all available technical indicator data from Bitcoin daily technical analysis tables. Provides comprehensive technical metrics ordered by date in descending order, limited to 30 records (approximately 30 days of daily data).",
+        "operation": "executeQuery",
+        "query": "SELECT \n    DATE(DATETIME) AS DATE_DAY,\n    \n    -- OHLCV using proper aggregation\n    MIN(CASE WHEN rn_asc = 1 THEN OPEN END) AS OPEN,\n    MAX(HIGH) AS HIGH,\n    MIN(LOW) AS LOW,\n    MAX(CASE WHEN rn_desc = 1 THEN CLOSE END) AS CLOSE,\n    SUM(VOLUME) AS VOLUME,\n    \n    -- End of day technical indicators\n    MAX(CASE WHEN rn_desc = 1 THEN SMA_20 END) AS SMA_20,\n    MAX(CASE WHEN rn_desc = 1 THEN EMA_12 END) AS EMA_12,\n    MAX(CASE WHEN rn_desc = 1 THEN EMA_26 END) AS EMA_26,\n    MAX(CASE WHEN rn_desc = 1 THEN MACD END) AS MACD,\n    MAX(CASE WHEN rn_desc = 1 THEN MACD_SIGNAL END) AS MACD_SIGNAL,\n    MAX(CASE WHEN rn_desc = 1 THEN MACD_DIFF END) AS MACD_DIFF,\n    MAX(CASE WHEN rn_desc = 1 THEN RSI END) AS RSI,\n    MAX(CASE WHEN rn_desc = 1 THEN BB_HIGH END) AS BB_HIGH,\n    MAX(CASE WHEN rn_desc = 1 THEN BB_LOW END) AS BB_LOW,\n    MAX(CASE WHEN rn_desc = 1 THEN BB_WIDTH END) AS BB_WIDTH,\n    MAX(CASE WHEN rn_desc = 1 THEN STOCH_K END) AS STOCH_K,\n    MAX(CASE WHEN rn_desc = 1 THEN STOCH_D END) AS STOCH_D,\n    MAX(CASE WHEN rn_desc = 1 THEN MFI END) AS MFI,\n    \n    -- Aggregated indicators\n    AVG(ATR) AS ATR_AVG,\n    SUM(PRICE_CHANGE) AS DAILY_PRICE_CHANGE,\n    AVG(HIGH_LOW_RATIO) AS HIGH_LOW_RATIO_AVG,\n    AVG(CLOSE_OPEN_RATIO) AS CLOSE_OPEN_RATIO_AVG,\n    MAX(CASE WHEN rn_desc = 1 THEN VOLATILITY_30D END) AS VOLATILITY_30D,\n    MAX(CASE WHEN rn_desc = 1 THEN PRICE_VOLATILITY_30D END) AS PRICE_VOLATILITY_30D,\n    MAX(CASE WHEN rn_desc = 1 THEN HL_VOLATILITY_30D END) AS HL_VOLATILITY_30D\n\nFROM (\n    SELECT *,\n        ROW_NUMBER() OVER (PARTITION BY DATE(DATETIME) ORDER BY UNIX_TIMESTAMP ASC) as rn_asc,\n        ROW_NUMBER() OVER (PARTITION BY DATE(DATETIME) ORDER BY UNIX_TIMESTAMP DESC) as rn_desc\n    FROM BTC_DATA.DATA.HOURLY_TA\n) \nGROUP BY DATE(DATETIME)\nORDER BY DATE_DAY DESC LIMIT 30;"
+      },
+      "type": "n8n-nodes-base.snowflakeTool",
+      "typeVersion": 1,
+      "position": [
+        1312,
+        2688
+      ],
+      "id": "3d568b51-8271-4650-86f5-63e93fb00509",
+      "name": "DAILY_TECHNICAL_INDICATORS",
+      "credentials": {
+        "snowflake": {
+          "id": "08DSPiqy4VUOejq6",
+          "name": "Snowflake account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "openai/gpt-oss-120b",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        3424,
+        1824
+      ],
+      "id": "2c10ba8d-9cab-4361-b2ca-c4f02c2644c2",
+      "name": "Groq Chat Model1",
+      "credentials": {
+        "groqApi": {
+          "id": "E3ByPi2PUMeiTyBt",
+          "name": "Groq account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.output.replace(/[_*[\\]()~`>#+=|{}.!-]/g, '\\\\$&') }}",
+        "messages": {
+          "messageValues": [
+            {
+              "message": "Format this text to be telegram friendly. Remove any code symbols (Markdown/html/...) if exists and clean it and make it use readable and not boring. Do not write any intro, liek \"here is the formatted text\" or \"This is your user-friendly message\" . Pass the processed message direcly"
+            }
+          ]
+        },
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.7,
+      "position": [
+        3360,
+        1600
+      ],
+      "id": "58167218-9530-4c2c-baad-c91cb86c8f12",
+      "name": "Basic LLM Chain1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1cb53042-91ce-401b-8034-4a1ce7d26c41",
+              "name": "body.message",
+              "value": "={{ $json.body.message }}",
+              "type": "string"
+            },
+            {
+              "id": "4bb7633e-c847-47e2-844f-41419f35d465",
+              "name": "ChatId",
+              "value": "={{ $json.body.sessionId }}",
+              "type": "string"
+            },
+            {
+              "id": "af6ed80d-87f5-4ddc-9205-16edfd85bc78",
+              "name": "source",
+              "value": "webhook",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        848,
+        2240
+      ],
+      "id": "38812643-c7e3-4bac-82de-ec6ff2e615ba",
+      "name": "Edit Fields2"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        1072,
+        2144
+      ],
+      "id": "15260c96-e517-4ac4-9eda-2c9d8da0b016",
+      "name": "Merge",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1cb53042-91ce-401b-8034-4a1ce7d26c41",
+              "name": "body.message",
+              "value": "={{ $('Telegram Trigger').item.json.message.text }}",
+              "type": "string"
+            },
+            {
+              "id": "4bb7633e-c847-47e2-844f-41419f35d465",
+              "name": "ChatId",
+              "value": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
+              "type": "string"
+            },
+            {
+              "id": "af6ed80d-87f5-4ddc-9205-16edfd85bc78",
+              "name": "source",
+              "value": "telegram",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        848,
+        1952
+      ],
+      "id": "fa82f3bb-850e-40e2-89ac-58afc0486cf5",
+      "name": "Edit Fields3"
+    },
+    {
+      "parameters": {
+        "toolDescription": "Expert in Bitcoin market sentiment, social metrics, and it also has a look on latest news ",
+        "text": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Prompt__User_Message_', ``, 'string') }}",
+        "options": {
+          "systemMessage": "You are a Bitcoin Madia Analysis Expert analyzing:\n      - Social media sentiment (Twitter, Reddit, Telegram)\n      - News and media coverage\n      - Fear & Greed Index\n      - Institutional sentiment indicators"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agentTool",
+      "typeVersion": 2.2,
+      "position": [
+        3344,
+        2480
+      ],
+      "id": "983bc467-8e12-4cb3-bd41-61d0920044ee",
+      "name": "Social & News Analyst"
+    },
+    {
+      "parameters": {
+        "operation": "scrape",
+        "url": "https://newhedge.io/bitcoin",
+        "scrapeOptions": {
+          "options": {
+            "formats": [
+              "html"
+            ],
+            "headers": {},
+            "waitFor": 2000
+          }
+        },
+        "requestOptions": {}
+      },
+      "type": "@mendable/n8n-nodes-firecrawl.firecrawl",
+      "typeVersion": 1,
+      "position": [
+        1552,
+        2000
+      ],
+      "id": "f406ed15-b537-45bd-87ac-bc0280931a34",
+      "name": "Scrape a url and get its content",
+      "credentials": {
+        "firecrawlApi": {
+          "id": "6TJCMUD2YbmqNhbg",
+          "name": "Firecrawl account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "check subscription1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch on Command": {
+      "main": [
+        [
+          {
+            "node": "check subscription",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Get Latest Strategy Result",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Deactivate Subscriber in Snowflake",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send a text message2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Latest Strategy Result": {
+      "main": [
+        [
+          {
+            "node": "Format Strategy Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Strategy Message": {
+      "main": [
+        [
+          {
+            "node": "Send Strategy Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Save Subscriber to Snowflake": {
+      "main": [
+        [
+          {
+            "node": "Send Welcome Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Deactivate Subscriber in Snowflake": {
+      "main": [
+        [
+          {
+            "node": "Send Goodbye Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "check subscription": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Send Welcome Message1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Send News Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Save Subscriber to Snowflake",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request1": {
+      "main": [
+        [
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "check subscription1": {
+      "main": [
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "If2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Not subscribed",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If2": {
+      "main": [
+        [
+          {
+            "node": "Switch on Command",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Edit Fields3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Get All Active Subscribers",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get All Active Subscribers": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Get Latest Strategy for Broadcast",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Latest Strategy for Broadcast": {
+      "main": [
+        [
+          {
+            "node": "Format Strategy Message1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Strategy Message1": {
+      "main": [
+        [
+          {
+            "node": "Send Strategy Message2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get All Active Subscribers1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items1": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Get Latest Strategy for Broadcast1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Latest Strategy for Broadcast1": {
+      "main": [
+        [
+          {
+            "node": "Format Strategy Message2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Strategy Message2": {
+      "main": [
+        [
+          {
+            "node": "Send Custom Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Get All Active Subscribers1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Custom Message": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Strategy Message2": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Main Orchestrator Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "General questions": {
+      "ai_tool": [
+        [
+          {
+            "node": "Main Orchestrator Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Technical Analyst": {
+      "ai_tool": [
+        [
+          {
+            "node": "Main Orchestrator Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Blockchain Analyst": {
+      "ai_tool": [
+        [
+          {
+            "node": "Main Orchestrator Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook1": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Market Data Analyst": {
+      "ai_tool": [
+        [
+          {
+            "node": "Main Orchestrator Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "General questions",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Trading signals": {
+      "ai_tool": [
+        [
+          {
+            "node": "Market Data Analyst",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Hourly OHLCV": {
+      "ai_tool": [
+        [
+          {
+            "node": "Market Data Analyst",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Daily OHLCV": {
+      "ai_tool": [
+        [
+          {
+            "node": "Market Data Analyst",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Cryptocurrecies data": {
+      "ai_tool": [
+        [
+          {
+            "node": "Market Data Analyst",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DeepSeek Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Market Data Analyst",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Snowflake": {
+      "ai_tool": [
+        [
+          {
+            "node": "Blockchain Analyst",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Blockchain Data": {
+      "ai_tool": [
+        [
+          {
+            "node": "Blockchain Analyst",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Coinbase OB": {
+      "ai_tool": [
+        [
+          {
+            "node": "Market Data Analyst",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Binance OB": {
+      "ai_tool": [
+        [
+          {
+            "node": "Market Data Analyst",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Kraken OB": {
+      "ai_tool": [
+        [
+          {
+            "node": "Market Data Analyst",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Bybit OB": {
+      "ai_tool": [
+        [
+          {
+            "node": "Market Data Analyst",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "News": {
+      "ai_tool": [
+        [
+          {
+            "node": "Social & News Analyst",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HOURLY FNG": {
+      "ai_tool": [
+        [
+          {
+            "node": "Social & News Analyst",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DAILY FNG": {
+      "ai_tool": [
+        [
+          {
+            "node": "Social & News Analyst",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Main Orchestrator Agent": {
+      "main": [
+        [
+          {
+            "node": "If3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "FINDATA": {
+      "ai_tool": [
+        [
+          {
+            "node": "Market Data Analyst",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTML": {
+      "main": [
+        [
+          {
+            "node": "Main Orchestrator Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Monthly Social Stats": {
+      "ai_tool": [
+        [
+          {
+            "node": "Social & News Analyst",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Latest Social stats": {
+      "ai_tool": [
+        [
+          {
+            "node": "Social & News Analyst",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Technical Analyst",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DeepSeek Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Blockchain Analyst",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model2": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Social & News Analyst",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Scrape a url and get its content",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If3": {
+      "main": [
+        [
+          {
+            "node": "If4",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Respond to Webhook1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres Chat Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "Main Orchestrator Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger1": {
+      "main": [
+        [
+          {
+            "node": "Execute a SQL query",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If4": {
+      "main": [
+        [
+          {
+            "node": "Basic LLM Chain1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Basic LLM Chain": {
+      "main": [
+        [
+          {
+            "node": "Send a text message1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HOURLY_TECHNICAL_INDICATORS": {
+      "ai_tool": [
+        [
+          {
+            "node": "Technical Analyst",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DAILY_TECHNICAL_INDICATORS": {
+      "ai_tool": [
+        [
+          {
+            "node": "Technical Analyst",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Basic LLM Chain1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Basic LLM Chain1": {
+      "main": [
+        [
+          {
+            "node": "Send a text message3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields2": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields3": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Social & News Analyst": {
+      "ai_tool": [
+        [
+          {
+            "node": "Main Orchestrator Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Scrape a url and get its content": {
+      "main": [
+        [
+          {
+            "node": "HTML",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "078d3523-7432-4520-b12f-056dab139658",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "1ab46223dd7d409e9b6c0855f81e8865734b2e26ba7127569e6a9787f75a94d4"
+  },
+  "id": "UdSfVfZgUwhkugEu",
+  "tags": [
+    {
+      "createdAt": "2025-08-18T15:26:13.773Z",
+      "updatedAt": "2025-08-18T15:26:13.773Z",
+      "id": "PJvTaSu4yEfOhMv3",
+      "name": "BitLAB"
+    }
+  ]
+}

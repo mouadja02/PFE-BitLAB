@@ -1,0 +1,14 @@
+# Install with: pip install -r requirements_optimization.txt
+
+scikit-optimize
+deap
+
+numpy
+scipy
+pandas
+
+joblib
+scikit-learn
+
+matplotlib
+plotly

@@ -1,0 +1,10 @@
+snowflake-connector-python==3.7.0
+requests==2.31.0
+apache-airflow-providers-snowflake==5.3.0
+apache-airflow-providers-http==4.9.0
+apache-airflow-providers-github==2.3.0
+pandas==2.1.4
+numpy==1.26.0
+yfinance
+ta==0.10.2
+beautifulsoup4

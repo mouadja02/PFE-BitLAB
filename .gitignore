@@ -1,0 +1,8 @@
+DeepTrader/batch_analysis/*
+DeepTrader/episode_plots/*
+DeepTrader/models/*
+DeepTrader/training_metrics/*
+DeepTrader/training_summary/*
+DeepTrader/reward_analysis/*
+DeepTrader/regime_analysis/*
+DeepTrader/evoution_metrics/*

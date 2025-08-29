@@ -1,0 +1,386 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import 'highlight.js/styles/github-dark.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Additional global styles */
+:root {
+  --foreground-rgb: 255, 255, 255; /* White text */
+  --background-start-rgb: 17, 17, 19; /* Darker background */
+  --background-end-rgb: 25, 25, 28; /* Slightly lighter dark */
+
+  --bitcoin-dark: rgb(30, 30, 36); /* Card background */
+  --bitcoin-gray: rgb(45, 45, 52); /* Slightly lighter gray */
+  --bitcoin-orange: #F7931A; /* Bitcoin Orange */
+  --bitcoin-glow: rgba(247, 147, 26, 0.3);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-color-hover: rgba(247, 147, 26, 0.4);
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    ) rgb(var(--background-start-rgb));
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', system-ui, 'Inter', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "cv01", "cv03", "cv04", "cv09";
+  font-variant-ligatures: contextual;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(45, 45, 52, 0.5);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--bitcoin-orange);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #e67e00;
+}
+
+/* Dark mode overrides */
+.dark {
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 17, 17, 19;
+  --background-end-rgb: 25, 25, 28;
+  --bitcoin-dark: rgb(30, 30, 36);
+  --bitcoin-gray: rgb(45, 45, 52);
+  --border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Enhanced Typography - Apple & Revolut Style */
+
+h1, h2, h3, h4, h5, h6 {
+  letter-spacing: -0.04em; /* Tighter letter spacing like Apple */
+  color: inherit;
+  font-feature-settings: "ss01", "ss02";
+}
+
+h1 {
+  font-size: 2.5rem; /* 40px - larger for impact */
+  line-height: 2.75rem; /* 44px */
+  font-weight: 700; /* SF Pro Display weight */
+  letter-spacing: -0.06em;
+}
+
+h2 {
+  font-size: 1.75rem; /* 28px */
+  line-height: 2.25rem; /* 36px */
+  font-weight: 600;
+  letter-spacing: -0.04em;
+}
+
+h3 {
+  font-size: 1.375rem; /* 22px */
+  line-height: 1.875rem; /* 30px */
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+h4 {
+  font-size: 1.125rem; /* 18px */
+  line-height: 1.625rem; /* 26px */
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+h5 {
+  font-size: 1rem; /* 16px */
+  line-height: 1.5rem; /* 24px */
+  font-weight: 600;
+}
+
+h6 {
+  font-size: 0.875rem; /* 14px */
+  line-height: 1.375rem; /* 22px */
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+/* Body text refinements */
+p {
+  font-weight: 400;
+  line-height: 1.6;
+  letter-spacing: -0.01em;
+}
+
+/* Small text like captions */
+small, .text-small {
+  font-size: 0.8125rem; /* 13px */
+  line-height: 1.25rem; /* 20px */
+  font-weight: 400;
+  letter-spacing: 0.005em;
+}
+
+/* Large text for emphasis */
+.text-large {
+  font-size: 1.125rem; /* 18px */
+  line-height: 1.75rem; /* 28px */
+  font-weight: 400;
+  letter-spacing: -0.015em;
+}
+
+/* Global transitions */
+*, *::before, *::after {
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 200ms; /* Slightly slower for smoother feel */
+}
+
+/* Card hover effects */
+.card-hover-effect {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-hover-effect:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* Futuristic borders and glows */
+.glow-border {
+  border: 1px solid var(--border-color);
+  box-shadow: 0 0 10px 0px var(--bitcoin-glow);
+}
+
+.glow-border:hover {
+  border-color: var(--border-color-hover);
+  box-shadow: 0 0 15px 2px var(--bitcoin-glow);
+}
+
+/* Animation utilities */
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.6s ease-out;
+}
+
+.animate-slide-up-delay {
+  animation: slideUp 0.6s ease-out;
+  animation-delay: var(--delay, 0ms);
+  animation-fill-mode: backwards; /* Start invisible */
+}
+
+.animate-pulse-fast {
+  animation: pulseFast 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(15px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes pulseFast {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+/* Glass effect panels */
+.glass-panel {
+  background: rgba(30, 30, 36, 0.6); /* More subtle glass */
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border-color);
+  border-radius: 0.75rem; /* 12px */
+}
+
+/* Gradient text for highlights */
+.gradient-text {
+  background: linear-gradient(90deg, var(--bitcoin-orange) 0%, #FFD700 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+
+/* Trading Bot Page Styles */
+.trading-agent-diagram {
+  position: relative;
+  height: 300px;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  background: linear-gradient(to bottom right, #f7931a10, #1a1f2710);
+  border: 1px solid rgba(247, 147, 26, 0.2);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+}
+
+.trading-agent-diagram:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  border-color: rgba(247, 147, 26, 0.4);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.tab-content-animation {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Animated Flow Diagram */
+.flow-diagram {
+  position: relative;
+  margin: 2rem auto;
+  max-width: 700px;
+}
+
+.flow-step {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  position: relative;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background: rgba(30, 30, 36, 0.6);
+  border: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.flow-step.animate {
+  animation: flowStepAppear 0.5s forwards;
+}
+
+.flow-step:nth-child(2).animate {
+  animation-delay: 0.2s;
+}
+
+.flow-step:nth-child(3).animate {
+  animation-delay: 0.4s;
+}
+
+.flow-step:nth-child(4).animate {
+  animation-delay: 0.6s;
+}
+
+.flow-step:nth-child(5).animate {
+  animation-delay: 0.8s;
+}
+
+.flow-step:nth-child(6).animate {
+  animation-delay: 1s;
+}
+
+.flow-step:hover {
+  transform: translateX(10px);
+  background: rgba(40, 40, 50, 0.8);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  border-color: var(--bitcoin-orange);
+}
+
+.flow-step-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: var(--bitcoin-orange);
+  margin-right: 1rem;
+  color: white;
+  font-weight: bold;
+  font-size: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.flow-step:hover .flow-step-icon {
+  transform: scale(1.1) rotate(10deg);
+}
+
+.flow-step-content {
+  flex: 1;
+}
+
+.flow-step-content h4 {
+  margin: 0 0 0.25rem 0;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.flow-step:hover .flow-step-content h4 {
+  color: var(--bitcoin-orange);
+}
+
+.flow-step-content p {
+  margin: 0;
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.flow-connector {
+  position: absolute;
+  left: 25px;
+  bottom: -20px;
+  width: 2px;
+  height: 20px;
+  background: var(--bitcoin-orange);
+  z-index: 1;
+  transition: all 0.3s ease;
+}
+
+.flow-step:hover .flow-connector {
+  height: 25px;
+  width: 3px;
+  background: white;
+}
+
+/* Pulse animation for connectors */
+.flow-step.animate .flow-connector {
+  animation: connectorPulse 2s infinite;
+  animation-delay: calc(0.2s * var(--step-index));
+}
+
+@keyframes flowStepAppear {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes connectorPulse {
+  0% {
+    opacity: 0.5;
+    box-shadow: 0 0 0 0 rgba(247, 147, 26, 0.4);
+  }
+  50% {
+    opacity: 1;
+    box-shadow: 0 0 0 5px rgba(247, 147, 26, 0);
+  }
+  100% {
+    opacity: 0.5;
+    box-shadow: 0 0 0 0 rgba(247, 147, 26, 0);
+  }
+} 
