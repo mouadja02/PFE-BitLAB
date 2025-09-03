@@ -38,8 +38,8 @@ OPTIMIZED_PARAMS = {
 }
 
 # Configuration Telegram
-TELEGRAM_BOT_TOKEN = "7781471038:AAE-ucSeegLOVPGhVVS6LIkyExpUC37-trk"
-TELEGRAM_CHAT_ID = "1766877995"
+TELEGRAM_BOT_TOKEN = my_telegram_bot_token    
+TELEGRAM_CHAT_ID = my_chat_id
 
 
 
