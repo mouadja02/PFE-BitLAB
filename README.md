@@ -1,6 +1,6 @@
 # BitLAB — Project Overview
 
-This repository contains the BitLAB project: a collection of tools, pipelines and applications built around cryptocurrency data, on-chain analytics, forecasting and a small trading research environment.
+This repository contains the BitLAB project: a collection of tools, pipelines and applications built around Bitcoin data, on-chain and technical analytics and a small trading research environment.
 
 The goal of this README is to help a reviewer quickly understand the layout of the repository, the role of each component, and how to run or inspect the code and artifacts. Explanations keep to plain language and point to the most relevant files.
 
